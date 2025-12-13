@@ -17,11 +17,11 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, payload: any) => {
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, payload: any) => {
     if (err) {
       return res.sendStatus(403);
     }
-  req.user = payload.user || payload; // Handle both cases for backward compatibility
+  req.user = payload.user || payload; 
     next();
   });
 };

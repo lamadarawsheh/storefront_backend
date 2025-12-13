@@ -1,37 +1,45 @@
-import { Router } from 'express';
-import { OrderProduct, IOrderProduct } from '../src/models/OrderProducts';
+import express, { Request, Response } from 'express';
+import { OrderProduct } from '../src/models/OrderProducts';
 
-const router = Router();
+const router = express.Router();
 
 // Add product to order
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
-    const orderProductData: IOrderProduct = req.body;
-    const orderProduct = await OrderProduct.addProduct(orderProductData);
+    const { order_id, product_id, quantity } = req.body;
+    const orderProduct = await OrderProduct.addProduct({ order_id, product_id, quantity });
     res.status(201).json(orderProduct);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to add product to order' });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    res.status(400).json({ error: errorMessage });
   }
 });
 
-// Get all products for an order
-router.get('/order/:orderId', async (req, res) => {
+// Get all products for a specific order
+router.get('/order/:orderId', async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
+    if (isNaN(orderId)) {
+      return res.status(400).json({ error: 'Invalid order ID format' });
+    }
+    
     const orderProducts = await OrderProduct.getOrderProducts(orderId);
     res.json(orderProducts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to get order products' });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    res.status(500).json({ error: errorMessage });
   }
 });
 
-// Get a specific product in an order
-router.get('/:orderId/products/:productId', async (req, res) => {
+// Get specific product in an order
+router.get('/order/:orderId/product/:productId', async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
     const productId = parseInt(req.params.productId);
+    
+    if (isNaN(orderId) || isNaN(productId)) {
+      return res.status(400).json({ error: 'Invalid ID format' });
+    }
     
     const orderProduct = await OrderProduct.getByOrderAndProduct(orderId, productId);
     if (!orderProduct) {
@@ -39,55 +47,50 @@ router.get('/:orderId/products/:productId', async (req, res) => {
     }
     
     res.json(orderProduct);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to get order product' });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    res.status(500).json({ error: errorMessage });
   }
 });
 
 // Update product quantity in an order
-router.put('/:orderId/products/:productId', async (req, res) => {
+router.put('/order/:orderId/product/:productId', async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
     const productId = parseInt(req.params.productId);
     const { quantity } = req.body;
     
-    if (typeof quantity !== 'number' || quantity < 0) {
-      return res.status(400).json({ error: 'Invalid quantity' });
+    if (isNaN(orderId) || isNaN(productId)) {
+      return res.status(400).json({ error: 'Invalid ID format' });
     }
     
-    if (quantity === 0) {
-      // If quantity is 0, remove the product from the order
-      await OrderProduct.removeProduct(orderId, productId);
-      return res.status(204).send();
-    } else {
-      // Update the product quantity
-      const updated = await OrderProduct.updateQuantity(orderId, productId, quantity);
-      return res.json(updated);
+    if (typeof quantity !== 'number' || quantity <= 0) {
+      return res.status(400).json({ error: 'Quantity must be a positive number' });
     }
-  } catch (error) {
-    console.error(error);
-    if (error instanceof Error && error.message.includes('not found')) {
-      return res.status(404).json({ error: error.message });
-    }
-    res.status(500).json({ error: 'Failed to update order product' });
+    
+    const updatedOrderProduct = await OrderProduct.updateQuantity(orderId, productId, quantity);
+    res.json(updatedOrderProduct);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    res.status(400).json({ error: errorMessage });
   }
 });
 
 // Remove product from order
-router.delete('/:orderId/products/:productId', async (req, res) => {
+router.delete('/order/:orderId/product/:productId', async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
     const productId = parseInt(req.params.productId);
     
+    if (isNaN(orderId) || isNaN(productId)) {
+      return res.status(400).json({ error: 'Invalid ID format' });
+    }
+    
     await OrderProduct.removeProduct(orderId, productId);
     res.status(204).send();
-  } catch (error) {
-    console.error(error);
-    if (error instanceof Error && error.message.includes('not found')) {
-      return res.status(404).json({ error: error.message });
-    }
-    res.status(500).json({ error: 'Failed to remove product from order' });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    res.status(400).json({ error: errorMessage });
   }
 });
 

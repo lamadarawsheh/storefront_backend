@@ -5,11 +5,23 @@ const router = Router();
 
 router.post('/', async (req, res) => {
   try {
+    console.log('Request body:', req.body); // Add this line for debugging
     const productData: IProduct = req.body;
+    
+    // Validate required fields
+    if (!productData.name || productData.price === undefined) {
+      return res.status(400).json({ 
+        error: 'Name and price are required' 
+      });
+    }
     const product = await Product.create(productData);
     res.status(201).json(product);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create product' });
+    console.error('Error creating product:', error); // Add this line
+    res.status(500).json({ 
+      error: 'Failed to create product',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 });
 

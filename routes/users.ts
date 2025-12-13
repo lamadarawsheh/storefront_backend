@@ -7,7 +7,7 @@ import { authenticateToken } from '../src/middleware/auth';
 dotenv.config();
 const router = express.Router();
 const userStore = new UserStore();
-const { TOKEN_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 // Register a new user
 router.post('/register', async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ router.post('/register', async (req: Request, res: Response) => {
       password: req.body.password,
     };
     const newUser = await userStore.create(user);
-    const token = jwt.sign({ user: newUser }, TOKEN_SECRET as string);
+    const token = jwt.sign({ user: newUser }, JWT_SECRET as string);
     res.json({ token });
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
@@ -31,7 +31,7 @@ router.post('/login', async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const user = await userStore.authenticate(email, password);
-    const token = jwt.sign({ user }, TOKEN_SECRET as string);
+    const token = jwt.sign({ user }, JWT_SECRET as string);
     res.json({ token });
   } catch (error) {
     res.status(401).json({ error: 'Invalid credentials' });
