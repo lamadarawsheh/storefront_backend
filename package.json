@@ -7,8 +7,9 @@
     "test": "jest --verbose --coverage",
     "build": "tsc",
     "start": "node build/index.js",
-    "migrate": "db-migrate up",
-    "migrate-down": "db-migrate down"
+    "migrate": "db-migrate",
+    "migrate:up": "db-migrate up",
+    "migrate:down": "db-migrate down"
   },
   "keywords": [],
   "author": "",
