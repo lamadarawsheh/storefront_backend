@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import { Pool, QueryConfig, QueryResult, QueryResultRow } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -20,12 +20,28 @@ client.on('error', (err: Error) => {
   console.error('Database error:', err);
 });
 
-// Log all queries
+// Store the original query method
 const originalQuery = client.query;
-client.query = async function (config: any, values?: any) {
-  console.log('Executing query:', config.text || config, 'with values:', values || []);
+
+// Override the query method with proper typing
+client.query = async function <T extends QueryResultRow = any, I extends any[] = any[]>(
+  queryTextOrConfig: string | QueryConfig<I>,
+  values?: I
+): Promise<QueryResult<T>> {
+  const queryText = typeof queryTextOrConfig === 'string' 
+    ? queryTextOrConfig 
+    : queryTextOrConfig.text || '';
+  
+  console.log('Executing query:', queryText, 'with values:', values || []);
+  
   try {
-    const result = await originalQuery.call(this, config, values);
+    // Use the original query method with proper typing
+    const result = await (originalQuery as any).call(
+      client,
+      queryTextOrConfig as any,
+      values
+    ) as QueryResult<T>;
+    
     return result;
   } catch (error) {
     console.error('Query error:', error);

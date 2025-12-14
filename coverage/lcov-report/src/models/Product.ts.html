@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -143,7 +143,8 @@
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,24 +156,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,10 +184,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -229,70 +231,71 @@ export interface IProduct {
   id?: number;
   name: string;
   price: number;
-  category?: string;
   created_at?: Date;
+  // Remove category since it doesn't exist in the table
 }
 &nbsp;
 export class Product {
-<span class="fstat-no" title="function not covered" >  static </span>async create(product: IProduct): Promise&lt;IProduct&gt; {
-    const { name, price, category } = <span class="cstat-no" title="statement not covered" >product;</span>
+// In src/models/Product.ts
+<span class="fstat-no" title="function not covered" >static </span>async create(product: IProduct): Promise&lt;IProduct&gt; {
+  const { name, price } = <span class="cstat-no" title="statement not covered" >product;</span> // Remove category from destructuring
     
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const sql = <span class="cstat-no" title="statement not covered" >`</span>
-        INSERT INTO products (name, price, category)
-        VALUES ($1, $2, $3)
-        RETURNING id, name, price, category, created_at
-      `;
-      const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [name, price, category || null]);</span>
-<span class="cstat-no" title="statement not covered" >      return result.rows[0];</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      throw new Error(`Could not create product ${name}. Error: ${err}`);</span>
-    }
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const sql = <span class="cstat-no" title="statement not covered" >`</span>
+      INSERT INTO products (name, price)
+      VALUES ($1, $2)
+      RETURNING id, name, price, created_at
+    `;
+    const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [name, price]);</span>
+<span class="cstat-no" title="statement not covered" >    return result.rows[0];</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    throw new Error(`Could not create product ${name}. Error: ${err}`);</span>
   }
+}
 &nbsp;
 <span class="fstat-no" title="function not covered" >  static </span>async findById(id: number): Promise&lt;IProduct | null&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const sql = <span class="cstat-no" title="statement not covered" >'SELECT id, name, price, category, created_at FROM products WHERE id = $1';</span>
-      const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [id]);</span>
-<span class="cstat-no" title="statement not covered" >      return result.rows[0] || null;</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      throw new Error(`Could not find product ${id}. Error: ${err}`);</span>
-    }
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const sql = <span class="cstat-no" title="statement not covered" >'SELECT id, name, price, created_at FROM products WHERE id = $1';</span>
+    const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [id]);</span>
+<span class="cstat-no" title="statement not covered" >    return result.rows[0] || null;</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    throw new Error(`Could not find product ${id}. Error: ${err}`);</span>
   }
+}
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>async findAll(): Promise&lt;IProduct[]&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const sql = <span class="cstat-no" title="statement not covered" >'SELECT id, name, price, category, created_at FROM products';</span>
-      const result = <span class="cstat-no" title="statement not covered" >await client.query(sql);</span>
-<span class="cstat-no" title="statement not covered" >      return result.rows;</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      throw new Error(`Could not get products. Error: ${err}`);</span>
-    }
+<span class="fstat-no" title="function not covered" >static </span>async findAll(): Promise&lt;IProduct[]&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const sql = <span class="cstat-no" title="statement not covered" >'SELECT id, name, price, created_at FROM products';</span>
+    const result = <span class="cstat-no" title="statement not covered" >await client.query(sql);</span>
+<span class="cstat-no" title="statement not covered" >    return result.rows;</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    throw new Error(`Could not get products. Error: ${err}`);</span>
   }
+}
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>async update(id: number, updates: Partial&lt;IProduct&gt;): Promise&lt;IProduct&gt; {
-    const { name, price, category } = <span class="cstat-no" title="statement not covered" >updates;</span>
+  // In src/models/Product.ts
+<span class="fstat-no" title="function not covered" >static </span>async update(id: number, updates: Partial&lt;IProduct&gt;): Promise&lt;IProduct&gt; {
+  const { name, price } = <span class="cstat-no" title="statement not covered" >updates;</span>
+  
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const sql = <span class="cstat-no" title="statement not covered" >`</span>
+      UPDATE products 
+      SET name = COALESCE($1, name),
+          price = COALESCE($2, price)
+      WHERE id = $3
+      RETURNING id, name, price, created_at
+    `;
+    const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [name, price, id]);</span>
     
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const sql = <span class="cstat-no" title="statement not covered" >`</span>
-        UPDATE products 
-        SET name = COALESCE($1, name),
-            price = COALESCE($2, price),
-            category = COALESCE($3, category)
-        WHERE id = $4
-        RETURNING id, name, price, category, created_at
-      `;
-      const result = <span class="cstat-no" title="statement not covered" >await client.query(sql, [name, price, category, id]);</span>
-      
-<span class="cstat-no" title="statement not covered" >      if (!result.rows[0]) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error(`Product with id ${id} not found`);</span>
-      }
-      
-<span class="cstat-no" title="statement not covered" >      return result.rows[0];</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      throw new Error(`Could not update product ${id}. Error: ${err}`);</span>
+<span class="cstat-no" title="statement not covered" >    if (!result.rows[0]) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error(`Product with id ${id} not found`);</span>
     }
+    
+<span class="cstat-no" title="statement not covered" >    return result.rows[0];</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    throw new Error(`Could not update product ${id}. Error: ${err}`);</span>
   }
+}
 &nbsp;
 <span class="fstat-no" title="function not covered" >  static </span>async delete(id: number): Promise&lt;void&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
@@ -310,7 +313,7 @@ export class Product {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-13T18:36:34.220Z
+                at 2025-12-14T09:39:20.327Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

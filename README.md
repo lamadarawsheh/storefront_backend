@@ -1,6 +1,16 @@
 # Store API
 
-This is a RESTful API for an e-commerce store built with Node.js, Express, TypeScript, and PostgreSQL.
+A secure, RESTful API for an e-commerce store built with Node.js, Express, TypeScript, and PostgreSQL. This API provides endpoints for user authentication, product management, and order processing.
+
+## Features
+
+- User authentication with JWT
+- Role-based access control (Admin/User)
+- CRUD operations for products, orders, and users
+- Secure password hashing with bcrypt
+- Environment-based configuration
+- Comprehensive test suite
+- API documentation
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -14,40 +24,81 @@ This is a RESTful API for an e-commerce store built with Node.js, Express, TypeS
 
 ## Prerequisites
 
+Before you begin, ensure you have the following installed:
+
 - Node.js (v14 or higher)
-- npm (v6 or higher)
+- npm (v6 or higher) or yarn
 - PostgreSQL (v12 or higher)
 - TypeScript (v4 or higher)
+- Git
 
-## Setup Instructions
+## Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/yourusername/store-project.git
    cd store-project
    ```
 
 2. **Install dependencies**
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
 3. **Set up environment files**
    ```bash
-   # Copy example files
+   # Copy and configure environment files
    cp .env.example .env
    cp .env.test.example .env.test
    ```
+
+## Database Setup
+
+1. **Create a new PostgreSQL database**
+   ```sql
+   CREATE DATABASE store_dev;
+   CREATE DATABASE store_test;
+   ```
+
+2. **Run migrations**
+   ```bash
+   # For development database
+   npm run migrate
    
-   - Update both `.env` and `.env.test` with your actual configuration.
-   - **Important**: Never commit these files to version control (they are in .gitignore).
+   # For test database
+   NODE_ENV=test npm run migrate
+   ```
 
-4. **Environment Variables**
+3. **Seed the database (optional)**
+   ```bash
+   npm run seed
+   ```
 
-   - `.env` - Development environment
-   - `.env.test` - Test environment (used when NODE_ENV=test)
-   - `.env.example` - Template for development
-   - `.env.test.example` - Template for testing
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Server
+PORT=3000
+NODE_ENV=development
+
+# JWT
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=24h
+
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=store_dev
+DB_TEST_NAME=store_test
+```
+
+For testing, create a `.env.test` file with test database credentials.
 
    Required variables for both environments:
    ```
