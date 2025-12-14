@@ -3,17 +3,31 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const client = new Pool({
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  port: Number(process.env.DB_PORT) || 5432,
-});
+let client: Pool;
+
+// Determine which database to use based on NODE_ENV
+if (process.env.NODE_ENV === 'test') {
+  client = new Pool({
+    host: process.env.DB_HOST,
+    database: process.env.DB_TEST,  // Using DB_TEST for test environment
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT) || 5432,
+  });
+} else {
+  // Default to development environment
+  client = new Pool({
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,  // Using DB_NAME for development
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT) || 5432,
+  });
+}
 
 // Add query logging
 client.on('connect', () => {
-  console.log('Connected to database');
+  console.log(`Connected to ${process.env.NODE_ENV === 'test' ? 'test' : 'development'} database`);
 });
 
 client.on('error', (err: Error) => {
@@ -35,7 +49,6 @@ client.query = async function <T extends QueryResultRow = any, I extends any[] =
   console.log('Executing query:', queryText, 'with values:', values || []);
   
   try {
-    // Use the original query method with proper typing
     const result = await (originalQuery as any).call(
       client,
       queryTextOrConfig as any,

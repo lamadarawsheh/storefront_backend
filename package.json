@@ -9,7 +9,10 @@
     "start": "node build/index.js",
     "migrate": "db-migrate",
     "migrate:up": "db-migrate up",
-    "migrate:down": "db-migrate down"
+    "migrate:down": "db-migrate down",
+     "migrate:test": "NODE_ENV=test db-migrate up",
+  "migrate:test:reset": "NODE_ENV=test db-migrate reset"
+
   },
   "keywords": [],
   "author": "",
