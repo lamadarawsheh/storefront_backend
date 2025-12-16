@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import { OrderProduct } from '../src/models/OrderProducts';
+import { authenticateToken } from '../src/middleware/auth';
 
 const router = express.Router();
 
-// Add product to order
-router.post('/', async (req: Request, res: Response) => {
+// Add product to order (protected route - requires JWT)
+router.post('/', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { order_id, product_id, quantity } = req.body;
     const orderProduct = await OrderProduct.addProduct({ order_id, product_id, quantity });
@@ -53,8 +54,8 @@ router.get('/order/:orderId/product/:productId', async (req: Request, res: Respo
   }
 });
 
-// Update product quantity in an order
-router.put('/order/:orderId/product/:productId', async (req: Request, res: Response) => {
+// Update product quantity in an order (protected route - requires JWT)
+router.put('/order/:orderId/product/:productId', authenticateToken, async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
     const productId = parseInt(req.params.productId);
@@ -76,8 +77,8 @@ router.put('/order/:orderId/product/:productId', async (req: Request, res: Respo
   }
 });
 
-// Remove product from order
-router.delete('/order/:orderId/product/:productId', async (req: Request, res: Response) => {
+// Remove product from order (protected route - requires JWT)
+router.delete('/order/:orderId/product/:productId', authenticateToken, async (req: Request, res: Response) => {
   try {
     const orderId = parseInt(req.params.orderId);
     const productId = parseInt(req.params.productId);

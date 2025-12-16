@@ -30,16 +30,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/14</span>
+                <span class='fraction'>6/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
@@ -127,16 +127,16 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,43 +155,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import { Pool, QueryConfig, QueryResult, QueryResultRow } from 'pg';
+<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">import { Pool, QueryConfig, QueryResult, QueryResultRow } from 'pg';
 import dotenv from 'dotenv';
 &nbsp;
 dotenv.config();
@@ -205,7 +205,7 @@ if (process.env.NODE_ENV === 'test') {
     database: process.env.DB_TEST,  // Using DB_TEST for test environment
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    port: Number(process.env.DB_PORT) || <span class="branch-1 cbranch-no" title="branch not covered" >5432,</span>
+    port: Number(process.env.DB_PORT) || 5432,
   });
 } else <span class="missing-if-branch" title="else path not taken" >E</span>{
   // Default to development environment
@@ -219,8 +219,8 @@ if (process.env.NODE_ENV === 'test') {
 }
 &nbsp;
 // Add query logging
-client.on('connect', () =&gt; {
-  console.log(`Connected to ${process.env.NODE_ENV === 'test' ? 'test' : <span class="branch-1 cbranch-no" title="branch not covered" >'development'}</span> database`);
+client.on('connect', <span class="fstat-no" title="function not covered" >() =</span>&gt; {
+<span class="cstat-no" title="statement not covered" >  console.log(`Connected to ${process.env.NODE_ENV === 'test' ? 'test' : 'development'} database`);</span>
 });
 &nbsp;
 client.on('error', <span class="fstat-no" title="function not covered" >(e</span>rr: Error) =&gt; {
@@ -239,7 +239,7 @@ client.query = async function &lt;T extends QueryResultRow = any, I extends any[
     ? queryTextOrConfig 
     : <span class="branch-1 cbranch-no" title="branch not covered" >queryTextOrConfig.text || '';</span>
   
-  console.log('Executing query:', queryText, 'with values:', values || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
+  console.log('Executing query:', queryText, 'with values:', values || []);
   
   try {
     const result = await (originalQuery as any).call(
@@ -248,10 +248,10 @@ client.query = async function &lt;T extends QueryResultRow = any, I extends any[
       values
     ) as QueryResult&lt;T&gt;;
     
-    return result;
+<span class="cstat-no" title="statement not covered" >    return result;</span>
   } catch (error) {
-<span class="cstat-no" title="statement not covered" >    console.error('Query error:', error);</span>
-<span class="cstat-no" title="statement not covered" >    throw error;</span>
+    console.error('Query error:', error);
+    throw error;
   }
 };
 &nbsp;
@@ -262,7 +262,7 @@ export default client;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-14T12:51:54.456Z
+                at 2025-12-16T00:21:20.380Z
             </div>
         <script src="../prettify.js"></script>
         <script>

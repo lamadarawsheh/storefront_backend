@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1765716714471" clover="3.2.0">
-  <project timestamp="1765716714471" name="All files">
-    <metrics statements="206" coveredstatements="77" conditionals="54" coveredconditionals="14" methods="27" coveredmethods="11" elements="287" coveredelements="102" complexity="0" loc="206" ncloc="206" packages="3" files="12" classes="12"/>
+<coverage generated="1765844480418" clover="3.2.0">
+  <project timestamp="1765844480418" name="All files">
+    <metrics statements="206" coveredstatements="59" conditionals="39" coveredconditionals="6" methods="27" coveredmethods="15" elements="272" coveredelements="80" complexity="0" loc="206" ncloc="206" packages="3" files="12" classes="12"/>
     <package name="src">
-      <metrics statements="20" coveredstatements="16" conditionals="14" coveredconditionals="5" methods="3" coveredmethods="2"/>
-      <file name="database.d.ts" path="/Users/lamadarawsheh/store-project/src/database.d.ts">
+      <metrics statements="20" coveredstatements="16" conditionals="14" coveredconditionals="6" methods="3" coveredmethods="1"/>
+      <file name="database.d.ts" path="/Users/Besan/storefront_backend/src/database.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="database.ts" path="/Users/lamadarawsheh/store-project/src/database.ts">
-        <metrics statements="20" coveredstatements="16" conditionals="14" coveredconditionals="5" methods="3" coveredmethods="2"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="9" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="10" count="2" type="stmt"/>
+      <file name="database.ts" path="/Users/Besan/storefront_backend/src/database.ts">
+        <metrics statements="20" coveredstatements="16" conditionals="14" coveredconditionals="6" methods="3" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="3" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="30" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="33" count="2" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="3" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="45" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="49" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="45" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="10" type="stmt"/>
+        <line num="52" count="10" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="60" count="10" type="stmt"/>
+        <line num="61" count="10" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.middleware">
-      <metrics statements="11" coveredstatements="10" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
-      <file name="auth.d.ts" path="/Users/lamadarawsheh/store-project/src/middleware/auth.d.ts">
+      <metrics statements="11" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="auth.d.ts" path="/Users/Besan/storefront_backend/src/middleware/auth.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="auth.ts" path="/Users/lamadarawsheh/store-project/src/middleware/auth.ts">
-        <metrics statements="11" coveredstatements="10" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <file name="auth.ts" path="/Users/Besan/storefront_backend/src/middleware/auth.ts">
+        <metrics statements="11" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="2" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="16" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="21" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="24" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="4" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.models">
-      <metrics statements="175" coveredstatements="51" conditionals="32" coveredconditionals="3" methods="22" coveredmethods="7"/>
-      <file name="Order.d.ts" path="/Users/lamadarawsheh/store-project/src/models/Order.d.ts">
+      <metrics statements="175" coveredstatements="41" conditionals="19" coveredconditionals="0" methods="22" coveredmethods="14"/>
+      <file name="Order.d.ts" path="/Users/Besan/storefront_backend/src/models/Order.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="Order.ts" path="/Users/lamadarawsheh/store-project/src/models/Order.ts">
-        <metrics statements="47" coveredstatements="12" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="2"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
+      <file name="Order.ts" path="/Users/Besan/storefront_backend/src/models/Order.ts">
+        <metrics statements="47" coveredstatements="7" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="5"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="30" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="59" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="75" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
       </file>
-      <file name="OrderProducts.d.ts" path="/Users/lamadarawsheh/store-project/src/models/OrderProducts.d.ts">
+      <file name="OrderProducts.d.ts" path="/Users/Besan/storefront_backend/src/models/OrderProducts.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="OrderProducts.ts" path="/Users/lamadarawsheh/store-project/src/models/OrderProducts.ts">
-        <metrics statements="59" coveredstatements="2" conditionals="18" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+      <file name="OrderProducts.ts" path="/Users/Besan/storefront_backend/src/models/OrderProducts.ts">
+        <metrics statements="59" coveredstatements="2" conditionals="11" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="29" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="39" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
@@ -149,108 +149,108 @@
         <line num="126" count="0" type="stmt"/>
         <line num="127" count="0" type="stmt"/>
         <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="137" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="138" count="0" type="stmt"/>
         <line num="142" count="0" type="stmt"/>
-        <line num="147" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="147" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="148" count="0" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
         <line num="154" count="0" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
-        <line num="165" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="165" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="166" count="0" type="stmt"/>
         <line num="169" count="0" type="stmt"/>
         <line num="171" count="0" type="stmt"/>
         <line num="172" count="0" type="stmt"/>
         <line num="177" count="0" type="stmt"/>
         <line num="178" count="0" type="stmt"/>
-        <line num="185" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="185" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="186" count="0" type="stmt"/>
         <line num="189" count="0" type="stmt"/>
         <line num="191" count="0" type="stmt"/>
         <line num="192" count="0" type="stmt"/>
       </file>
-      <file name="Product.d.ts" path="/Users/lamadarawsheh/store-project/src/models/Product.d.ts">
+      <file name="Product.d.ts" path="/Users/Besan/storefront_backend/src/models/Product.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="Product.ts" path="/Users/lamadarawsheh/store-project/src/models/Product.ts">
-        <metrics statements="30" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+      <file name="Product.ts" path="/Users/Besan/storefront_backend/src/models/Product.ts">
+        <metrics statements="30" coveredstatements="20" conditionals="3" coveredconditionals="0" methods="5" coveredmethods="4"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
         <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="63" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="64" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
       </file>
-      <file name="User.d.ts" path="/Users/lamadarawsheh/store-project/src/models/User.d.ts">
+      <file name="User.d.ts" path="/Users/Besan/storefront_backend/src/models/User.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="User.ts" path="/Users/lamadarawsheh/store-project/src/models/User.ts">
-        <metrics statements="39" coveredstatements="35" conditionals="4" coveredconditionals="3" methods="6" coveredmethods="5"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
+      <file name="User.ts" path="/Users/Besan/storefront_backend/src/models/User.ts">
+        <metrics statements="39" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="5"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="35" count="8" type="stmt"/>
-        <line num="36" count="8" type="stmt"/>
-        <line num="37" count="8" type="stmt"/>
-        <line num="41" count="8" type="stmt"/>
-        <line num="47" count="7" type="stmt"/>
-        <line num="48" count="7" type="stmt"/>
-        <line num="52" count="4" type="stmt"/>
-        <line num="53" count="4" type="stmt"/>
-        <line num="54" count="4" type="stmt"/>
-        <line num="55" count="4" type="stmt"/>
-        <line num="57" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="58" count="4" type="stmt"/>
-        <line num="59" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="60" count="3" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="0" type="stmt"/>
-        <line num="80" count="3" type="stmt"/>
-        <line num="81" count="3" type="stmt"/>
-        <line num="82" count="3" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
       </file>
     </package>
   </project>

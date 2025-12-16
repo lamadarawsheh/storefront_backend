@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { Product, IProduct } from '../src/models/Product';
+import { authenticateToken } from '../src/middleware/auth';
 
 const router = Router();
 
-router.post('/', async (req, res) => {
+// Create a new product (protected route - requires JWT)
+router.post('/', authenticateToken, async (req, res) => {
   try {
     console.log('Request body:', req.body); // Add this line for debugging
     const productData: IProduct = req.body;
@@ -44,7 +46,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+// Update a product (protected route - requires JWT)
+router.put('/:id', authenticateToken, async (req, res) => {
   try {
     const updatedProduct = await Product.update(Number(req.params.id), req.body);
     if (!updatedProduct) return res.status(404).json({ error: 'Product not found' });
@@ -54,7 +57,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+// Delete a product (protected route - requires JWT)
+router.delete('/:id', authenticateToken, async (req, res) => {
   try {
     await Product.delete(Number(req.params.id));
     res.status(204).send();
