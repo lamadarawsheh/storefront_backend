@@ -27,7 +27,9 @@ if (process.env.NODE_ENV === 'test') {
 
 // Add query logging
 client.on('connect', () => {
-  console.log(`Connected to ${process.env.NODE_ENV === 'test' ? 'test' : 'development'} database`);
+  if (process.env.DEBUG) {
+    console.log(`Connected to ${process.env.NODE_ENV === 'test' ? 'test' : 'development'} database`);
+  }
 });
 
 client.on('error', (err: Error) => {
@@ -46,7 +48,9 @@ client.query = async function <T extends QueryResultRow = any, I extends any[] =
     ? queryTextOrConfig 
     : queryTextOrConfig.text || '';
   
-  console.log('Executing query:', queryText, 'with values:', values || []);
+  if (process.env.DEBUG) {
+    console.log('Executing query:', queryText, 'with values:', values || []);
+  }
   
   try {
     const result = await (originalQuery as any).call(

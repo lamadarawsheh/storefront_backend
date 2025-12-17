@@ -40,6 +40,9 @@ describe('Model Unit Tests', () => {
       await db.query('DELETE FROM orders');
       await db.query('DELETE FROM products');
       await db.query('DELETE FROM users');
+
+      // Close database connection
+      await db.end();
     } catch (error) {
       console.error('Error cleaning up test data:', error);
     }
@@ -57,9 +60,9 @@ describe('Model Unit Tests', () => {
     describe('create method', () => {
       it('should create a new user and return user data without password', async () => {
         const result = await userStore.create(testUser);
-        
+
         testUserId = result.id as number;
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBeDefined();
         expect(result.firstname).toBe(testUser.firstname);
@@ -77,11 +80,11 @@ describe('Model Unit Tests', () => {
     describe('index method', () => {
       it('should return a list of all users', async () => {
         const result = await userStore.index();
-        
+
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
-        
+
         // Verify the test user is in the list
         const foundUser = result.find(u => u.email === testUser.email);
         expect(foundUser).toBeDefined();
@@ -92,7 +95,7 @@ describe('Model Unit Tests', () => {
     describe('show method', () => {
       it('should return a specific user by id', async () => {
         const result = await userStore.show(testUserId);
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBe(testUserId);
         expect(result.firstname).toBe(testUser.firstname);
@@ -109,7 +112,7 @@ describe('Model Unit Tests', () => {
     describe('authenticate method', () => {
       it('should authenticate user with valid credentials', async () => {
         const result = await userStore.authenticate(testUser.email, testUser.password);
-        
+
         expect(result).toBeDefined();
         expect(result?.email).toBe(testUser.email);
         expect(result?.firstname).toBe(testUser.firstname);
@@ -140,9 +143,9 @@ describe('Model Unit Tests', () => {
     describe('create method', () => {
       it('should create a new product', async () => {
         const result = await Product.create(testProduct);
-        
+
         testProductId = result.id as number;
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBeDefined();
         expect(result.name).toBe(testProduct.name);
@@ -154,11 +157,11 @@ describe('Model Unit Tests', () => {
     describe('findAll method', () => {
       it('should return a list of all products', async () => {
         const result = await Product.findAll();
-        
+
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
-        
+
         // Verify the test product is in the list
         const foundProduct = result.find(p => p.name === testProduct.name);
         expect(foundProduct).toBeDefined();
@@ -169,7 +172,7 @@ describe('Model Unit Tests', () => {
     describe('findById method', () => {
       it('should return a specific product by id', async () => {
         const result = await Product.findById(testProductId);
-        
+
         expect(result).toBeDefined();
         expect(result?.id).toBe(testProductId);
         expect(result?.name).toBe(testProduct.name);
@@ -186,7 +189,7 @@ describe('Model Unit Tests', () => {
       it('should update product name', async () => {
         const updatedName = 'Updated Product Name';
         const result = await Product.update(testProductId, { name: updatedName });
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBe(testProductId);
         expect(result.name).toBe(updatedName);
@@ -196,7 +199,7 @@ describe('Model Unit Tests', () => {
       it('should update product price', async () => {
         const updatedPrice = 39.99;
         const result = await Product.update(testProductId, { price: updatedPrice });
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBe(testProductId);
         expect(Number(result.price)).toBe(updatedPrice);
@@ -221,11 +224,11 @@ describe('Model Unit Tests', () => {
           user_id: testUserId,
           total: 99.99
         };
-        
+
         const result = await orderStore.create(orderData);
         testOrderId = result.id as number;
         testOrder = result;
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBeDefined();
         expect(result.status).toBe(orderData.status);
@@ -237,11 +240,11 @@ describe('Model Unit Tests', () => {
     describe('index method', () => {
       it('should return a list of all orders', async () => {
         const result = await orderStore.index();
-        
+
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
-        
+
         // Verify the test order is in the list
         const foundOrder = result.find(o => o.id === testOrderId);
         expect(foundOrder).toBeDefined();
@@ -252,7 +255,7 @@ describe('Model Unit Tests', () => {
     describe('show method', () => {
       it('should return a specific order by id', async () => {
         const result = await orderStore.show(testOrderId);
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBe(testOrderId);
         expect(result.status).toBe('active');
@@ -271,9 +274,9 @@ describe('Model Unit Tests', () => {
           user_id: testUserId,
           total: 150.00
         };
-        
+
         const result = await orderStore.update(testOrderId, updatedOrder);
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBe(testOrderId);
         expect(result.status).toBe('complete');
@@ -286,7 +289,7 @@ describe('Model Unit Tests', () => {
           user_id: testUserId,
           total: 100.00
         };
-        
+
         await expect(orderStore.update(99999, updatedOrder)).rejects.toThrow();
       });
     });
@@ -313,9 +316,9 @@ describe('Model Unit Tests', () => {
           product_id: testProductId,
           quantity: 2
         };
-        
+
         const result = await OrderProduct.addProduct(orderProductData);
-        
+
         expect(result).toBeDefined();
         expect(result.id).toBeDefined();
         expect(result.order_id).toBe(secondOrderId);
@@ -330,9 +333,9 @@ describe('Model Unit Tests', () => {
           product_id: testProductId,
           quantity: 3
         };
-        
+
         const result = await OrderProduct.addProduct(orderProductData);
-        
+
         expect(result).toBeDefined();
         expect(result.quantity).toBe(5); // 2 + 3 = 5
       });
@@ -343,7 +346,7 @@ describe('Model Unit Tests', () => {
           product_id: testProductId,
           quantity: 1
         };
-        
+
         await expect(OrderProduct.addProduct(orderProductData)).rejects.toThrow();
       });
 
@@ -353,7 +356,7 @@ describe('Model Unit Tests', () => {
           product_id: 99999,
           quantity: 1
         };
-        
+
         await expect(OrderProduct.addProduct(orderProductData)).rejects.toThrow();
       });
     });
@@ -361,11 +364,11 @@ describe('Model Unit Tests', () => {
     describe('getOrderProducts method', () => {
       it('should return all products in an order', async () => {
         const result = await OrderProduct.getOrderProducts(secondOrderId);
-        
+
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
-        
+
         const foundProduct = result.find(op => op.product_id === testProductId);
         expect(foundProduct).toBeDefined();
       });
@@ -377,9 +380,9 @@ describe('Model Unit Tests', () => {
           user_id: testUserId,
           total: 0
         });
-        
+
         const result = await OrderProduct.getOrderProducts(emptyOrder.id as number);
-        
+
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBe(0);
@@ -389,7 +392,7 @@ describe('Model Unit Tests', () => {
     describe('getByOrderAndProduct method', () => {
       it('should return specific product in order', async () => {
         const result = await OrderProduct.getByOrderAndProduct(secondOrderId, testProductId);
-        
+
         expect(result).toBeDefined();
         expect(result?.order_id).toBe(secondOrderId);
         expect(result?.product_id).toBe(testProductId);
@@ -405,7 +408,7 @@ describe('Model Unit Tests', () => {
       it('should update product quantity in order', async () => {
         const newQuantity = 10;
         const result = await OrderProduct.updateQuantity(secondOrderId, testProductId, newQuantity);
-        
+
         expect(result).toBeDefined();
         expect(result.quantity).toBe(newQuantity);
       });
@@ -426,11 +429,11 @@ describe('Model Unit Tests', () => {
     describe('removeProduct method', () => {
       it('should remove product from order', async () => {
         const result = await OrderProduct.removeProduct(secondOrderId, testProductId);
-        
+
         expect(result).toBeDefined();
         expect(result.order_id).toBe(secondOrderId);
         expect(result.product_id).toBe(testProductId);
-        
+
         // Verify product is removed
         const checkResult = await OrderProduct.getByOrderAndProduct(secondOrderId, testProductId);
         expect(checkResult).toBeNull();
@@ -454,9 +457,9 @@ describe('Model Unit Tests', () => {
         email: 'delete.test@test.com',
         password: 'password123'
       });
-      
+
       await userStore.delete(deleteTestUser.id as number);
-      
+
       // Verify user is deleted
       const result = await userStore.show(deleteTestUser.id as number);
       expect(result).toBeUndefined();
@@ -471,9 +474,9 @@ describe('Model Unit Tests', () => {
         name: 'Delete Test Product',
         price: 9.99
       });
-      
+
       await Product.delete(deleteTestProduct.id as number);
-      
+
       // Verify product is deleted
       const result = await Product.findById(deleteTestProduct.id as number);
       expect(result).toBeNull();
@@ -489,9 +492,9 @@ describe('Model Unit Tests', () => {
         user_id: testUserId,
         total: 50.00
       });
-      
+
       await orderStore.delete(deleteTestOrder.id as number);
-      
+
       // Verify order is deleted
       await expect(orderStore.show(deleteTestOrder.id as number)).rejects.toThrow();
     });

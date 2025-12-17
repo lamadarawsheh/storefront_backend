@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 import { UserStore } from '../src/models/User';
+import db from '../src/database';
 import { Client } from 'pg';
 import { config } from 'dotenv';
 import jwt from 'jsonwebtoken';
@@ -69,12 +70,15 @@ describe('User API', () => {
     // Clean up test data
     console.log('Cleaning up test data...');
     await userStore.deleteAll();
-    
+
     // Close the database connection
     if (dbClient) {
       await dbClient.end();
       console.log('Database connection closed');
     }
+
+    // Close the app's database pool
+    await db.end();
   });
 
   describe('POST /users/register', () => {
@@ -92,7 +96,7 @@ describe('User API', () => {
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('token');
-      
+
       // Decode the token to verify user data
       const decoded = decodeToken(res.body.token);
       expect(decoded.user).toHaveProperty('id');
@@ -104,7 +108,7 @@ describe('User API', () => {
     it('should not register a user with duplicate email', async () => {
       // Create a unique email for this test
       const uniqueEmail = `test-${uuidv4()}@example.com`;
-      
+
       // First, create a user with this email
       const userData = {
         firstname: 'Test',
@@ -139,7 +143,7 @@ describe('User API', () => {
         email: `login-${Date.now()}@test.com`,
         password: 'testpassword123'
       };
-      
+
       // Register the user first
       await request(app)
         .post('/users/register')
@@ -161,7 +165,7 @@ describe('User API', () => {
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('token');
-      
+
       // Verify the token contains user data
       const decoded = decodeToken(res.body.token);
       expect(decoded.user).toHaveProperty('id');
@@ -213,11 +217,11 @@ describe('User API', () => {
 
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
-      
+
       // Verify our test user is in the list
       const testUser = res.body.find((u: any) => u.email === uniqueEmail);
       expect(testUser).toBeDefined();
-      
+
       // Verify the user object structure
       expect(testUser).toHaveProperty('id');
       expect(testUser).toHaveProperty('firstname', 'Test');
@@ -248,7 +252,7 @@ describe('User API', () => {
       const token = registerRes.body.token;
       const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { user: any };
       const testUserId = decoded.user.id;
-      
+
       // Now try to get the user by ID
       const res = await request(app)
         .get(`/users/${testUserId}`)

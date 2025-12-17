@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../app';
-import  db  from '../src/database';
+import db from '../src/database';
 import { Pool } from 'pg';
 import jwt from 'jsonwebtoken';
 import { UserStore } from '../src/models/User';
@@ -52,7 +52,7 @@ async function createTestUser() {
 
   // Extract user ID from token
   const decoded = decodeToken(loginRes.body.token);
-  
+
   return {
     token: loginRes.body.token,
     userId: decoded.user.id,
@@ -71,9 +71,8 @@ describe('Orders API', () => {
     // Load test environment variables
     config({ path: '.env.test' });
 
-    // Connect to the database
-    await db.connect();
-    console.log('Successfully connected to test database');
+    // Connect to the database is handled by the pool
+    // console.log('Successfully connected to test database');
 
     // Clean up any existing test data
     await orderStore.deleteAll();
@@ -85,35 +84,38 @@ describe('Orders API', () => {
     userId = id;
     testUserEmail = email;
   });
-afterAll(async () => {
-  try {
-    // Clean up test data
-    if (testUserEmail) {
-      try {
-        // Use a new client for cleanup to avoid connection issues
-        const cleanupClient = new Pool({
-          host: process.env.DB_HOST,
-          database: process.env.DB_NAME,
-          user: process.env.DB_USER,
-          password: process.env.DB_PASSWORD,
-          port: Number(process.env.DB_PORT) || 5432,
-        });
-        await cleanupClient.query('DELETE FROM orders WHERE user_id = $1', [userId]);
-        await cleanupClient.query('DELETE FROM users WHERE email = $1', [testUserEmail]);
-        await cleanupClient.end();
-      } catch (e) {
-        console.error('Error during cleanup:', e);
+  afterAll(async () => {
+    try {
+      // Clean up test data
+      if (testUserEmail) {
+        try {
+          // Use a new client for cleanup to avoid connection issues
+          const cleanupClient = new Pool({
+            host: process.env.DB_HOST,
+            database: process.env.DB_NAME,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            port: Number(process.env.DB_PORT) || 5432,
+          });
+          await cleanupClient.query('DELETE FROM orders WHERE user_id = $1', [userId]);
+          await cleanupClient.query('DELETE FROM users WHERE email = $1', [testUserEmail]);
+          await cleanupClient.end();
+
+          // Close the app's database pool
+          await db.end();
+        } catch (e) {
+          console.error('Error during cleanup:', e);
+        }
       }
+    } catch (error) {
+      console.error('Error in afterAll:', error);
     }
-  } catch (error) {
-    console.error('Error in afterAll:', error);
-  }
-});
+  });
   describe('POST /orders', () => {
     it('should reject requests without token', async () => {
       const res = await request(app)
         .post('/orders')
-        .send({ 
+        .send({
           status: 'active',
           total: 99.99,
           user_id: 1
@@ -126,24 +128,24 @@ afterAll(async () => {
         status: 'active',
         total: '99.99'  // Ensure total is a string to match API expectations
       };
-      
+
       try {
         const res = await request(app)
           .post('/orders')
           .set('Authorization', `Bearer ${token}`)
           .send(orderData);
-        
+
         console.log('Order creation response:', {
           status: res.status,
           body: res.body,
           headers: res.headers
         });
-        
+
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('id');
         expect(res.body.status).toBe(orderData.status);
         expect(res.body.total).toBe(orderData.total);
-        
+
         // The user_id should be set from the token
         expect(res.body.user_id).toBe(userId);
 

@@ -7,20 +7,18 @@ const router = Router();
 // Create a new product (protected route - requires JWT)
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    console.log('Request body:', req.body); // Add this line for debugging
     const productData: IProduct = req.body;
-    
+
     // Validate required fields
     if (!productData.name || productData.price === undefined) {
-      return res.status(400).json({ 
-        error: 'Name and price are required' 
+      return res.status(400).json({
+        error: 'Name and price are required'
       });
     }
     const product = await Product.create(productData);
     res.status(201).json(product);
   } catch (error) {
-    console.error('Error creating product:', error); // Add this line
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to create product',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
@@ -67,8 +65,8 @@ router.delete('/:id', authenticateToken, async (req, res) => {
     if (error instanceof Error && error.message.includes('not found')) {
       return res.status(404).json({ error: 'Product not found' });
     }
-    res.status(500).json({ 
-      error: error instanceof Error ? error.message : 'Failed to delete product' 
+    res.status(500).json({
+      error: error instanceof Error ? error.message : 'Failed to delete product'
     });
   }
 });
